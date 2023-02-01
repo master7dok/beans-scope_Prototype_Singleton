@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
-@Service
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+@Service("BaseService2")
 public class BaseService2 implements CommandLineRunner {
 
     @Autowired
@@ -21,5 +24,15 @@ public class BaseService2 implements CommandLineRunner {
 
         System.out.println("-----Singleton2------");
         System.out.println(accountServiceSingleton.getName());
+    }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("*********" + getClass().getName() + "******* init method");
+    }
+
+    @PreDestroy
+    public void destroy() {
+        System.out.println("*********" + getClass().getName() + "******* destroy method");
     }
 }
